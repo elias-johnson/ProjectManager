@@ -11,6 +11,9 @@
 setlocal enabledelayedexpansion
 @echo off
 
+:: DEFAULT TEXT EDITOR
+set text_editor=notepad
+
 :: Create directory for projects if it does not already exist
 if not exist "%Projects%" (mkdir Projects)
 cd Projects
@@ -27,6 +30,7 @@ cd Projects
 	echo  (a) View All		
 	echo  (n) New Project
 	echo  (g) Github
+	echo  (d) Change Preferred Text Editor
 	echo  (e) Exit
 	echo.
 
@@ -43,6 +47,7 @@ cd Projects
 		goto Project_Menu
 	)
 	if !user_input!==e (goto Exit) 
+	if !user_input!==d (set /p text_editor=New Text Editor: )
 		
 	:: Base case
 	goto Project_Menu
@@ -156,14 +161,14 @@ cd Projects
 	goto View_Projects
 
 
-:: View, edit, and run a project
+:: View and edit files inside a project
 :Project
 
 	:: Display menu options
 	cls
-	echo  ---------
-	echo   Project 
-	echo  ---------
+	echo  --------------------------------------
+	echo   Project - Enter Name of File to Edit
+	echo  --------------------------------------
 	echo.
 	set /A num_files=0
 	for %%F in (*) do (
@@ -186,32 +191,32 @@ cd Projects
 	if !user_input!==n (
 		set /p new_file=Name of new file: 
 		if !new_file!==n (
-			echo Invalid file name.
-			timeout /t 1 /nobreak >nul
+			echo Invalid File Name.
+			timeout /t 2 /nobreak >nul
 			goto Project
 		)
 		if !new_file!==b (
-			echo Invalid file name.
-			timeout /t 1 /nobreak >nul
+			echo Invalid File Name.
+			timeout /t 2 /nobreak >nul
 			goto Project
 		)
 		if !new_file!==.. (
-			echo Invalid file name.
-			timeout /t 1 /nobreak >nul
+			echo Invalid File Name.
+			timeout /t 2 /nobreak >nul
 			goto Project
 		)
 		if !new_file!==. (
-			echo Invalid file name.
-			timeout /t 1 /nobreak >nul
+			echo Invalid File Name.
+			timeout /t 2 /nobreak >nul
 			goto Project
 		)
 		echo.> !new_file!
 		goto Project
 	)
 	if !user_input!==d (
-		set /p delete=Name of file to delete: 
+		set /p delete=Name of File to Delete: 
 		if exist "!delete!" (
-			set /p confirmation="Are you sure? (y/n): "
+			set /p confirmation="Are You Sure? (y/n): "
 			if "!confirmation!"=="y" (
 				del "!delete!"
 			)

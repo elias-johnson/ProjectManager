@@ -6,4 +6,6 @@ This script will only work for Windows. It will be designed to work on Windows 1
 
 To download the Batch file, click on the raw file link and save as a .bat: [Raw File](https://raw.githubusercontent.com/elias-johnson/ProjectManager/refs/heads/main/.ProjectManager.bat)
 
-Download the file to an easily accessible location on your machine (such as C:\Users\yourusername\)
+Download the file to an easily accessible location on your machine (such as C:\Users\yourusername\).
+
+Currently, this project can only manage files inside a project directory (no directory trees). 

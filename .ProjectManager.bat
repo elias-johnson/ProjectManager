@@ -30,8 +30,8 @@ cd Projects
 	echo  (a) View All		
 	echo  (n) New Project
 	echo  (g) Github
-	echo  (d) Change Preferred Text Editor
-	echo  (e) Exit
+	echo  (e) Change Preferred Text Editor
+	echo  (x) Exit
 	echo.
 
 	:: Prompt user for input
@@ -46,8 +46,8 @@ cd Projects
 		start chrome https://github.com/
 		goto Project_Menu
 	)
-	if !user_input!==e (goto Exit) 
-	if !user_input!==d (set /p text_editor=New Text Editor: )
+	if !user_input!==e (set /p text_editor=New Text Editor: )
+	if !user_input!==x (goto Exit) 
 		
 	:: Base case
 	goto Project_Menu
@@ -55,12 +55,6 @@ cd Projects
 
 :: Create new project
 :Create_Project
-
-:::::::::::::::::::::::
-::
-:: TODO: ensure that users cannot create a project with a name so that they cd out of Projects directory
-::
-:::::::::::::::::::::::
 
 	cls
 	echo  ----------------
@@ -112,12 +106,6 @@ cd Projects
 :: View projects and select one for more details and options
 :View_Projects
 
-:::::::::::::::::::::::
-::
-:: TODO: ensure that users cannot delete a directory not inside the Projects directory
-::
-:::::::::::::::::::::::
-
 	:: Display menu options
 	cls
 	echo  --------------------------------------------------
@@ -137,7 +125,7 @@ cd Projects
 	:: Execute user input
 	if !user_input!==d (
 		set /p delete=Name of project to delete: 
-		if exist "!delete!" (
+		if exist ".\!delete!" (
 			set /p confirmation="Are You Sure? (y/n): "
 			if "!confirmation!"=="y" (
 				rmdir /S /Q "!delete!"
